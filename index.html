@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+  <html lang="id">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>GDX TOOLS - LICENSE GENERATOR</title>
+      <style>
+          body { background-color: #000; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { text-align: center; background: #111; padding: 40px; border-radius: 20px; border: 2px solid #f00; box-shadow: 0 0 20px rgba(255,0,0,0.3); max-width: 90%; }
+        h1 { color: #f00; font-size: 24px; margin-bottom: 20px; }
+                .key-box { background: #222; padding: 15px; border-radius: 10px; font-size: 28px; font-weight: bold; color: #fff; border: 1px solid #444; margin: 20px 0; letter-spacing: 2px; }
+                .instruction { font-size: 14px; opacity: 0.7; line-height: 1.6; }
+        .copy-btn { background: #f00; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>TOKEN LISENSI HARI INI</h1>
+                  <div class="instruction">Silakan salin kode di bawah ini dan masukkan ke aplikasi GDX Tools Anda.</div>
+        <div class="key-box" id="keyDisplay">GENERATING...</div>
+        <button class="copy-btn" onclick="copyKey()">SALIN KODE</button>
+                  <div class="instruction" style="margin-top: 20px; font-size: 11px;">Token ini diperbarui secara otomatis setiap hari.</div>
+    </div>
+
+    <script>
+                  function generateKey() {
+                      const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const dateStr = year + month + day;
+            return "GDX-" + dateStr + "-PRO";
+}
+
+        const key = generateKey();
+        document.getElementById('keyDisplay').innerText = key;
+
+        function copyKey() {
+            navigator.clipboard.writeText(key);
+            alert("Kode disalin: " + key);
+}
+    </script>
+</body>
+</html>

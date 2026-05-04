@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GDX TOOLS - LICENSE GENERATOR</title>
+      <style>
+                body {
+                              background-color: #000;
+                              color: #fff;
+                              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              height: 100vh;
+                              margin: 0;
+                              overflow: hidden;
+                }
+                .container {
+                              text-align: center;
+                              background: #111;
+                              padding: 40px;
+                              border-radius: 24px;
+                              border: 2px solid #333;
+                              box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+                              max-width: 400px;
+                              width: 90%;
+                              position: relative;
+                }
+                h1 {
+                              color: #f00;
+                              font-size: 24px;
+                              margin-bottom: 20px;
+                              text-transform: uppercase;
+                              letter-spacing: 2px;
+                              text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+                }
+                .key-box {
+                              background: #222;
+                              padding: 20px;
+                              border-radius: 12px;
+                              font-family: 'Courier New', Courier, monospace;
+                              font-size: 22px;
+                              font-weight: bold;
+                              color: #fff;
+                              margin: 20px 0;
+                              border: 1px solid #444;
+                              letter-spacing: 1px;
+                }
+                .copy-btn {
+                              background: #f00;
+                              color: #fff;
+                              border: none;
+                              padding: 12px 24px;
+                              font-size: 16px;
+                              font-weight: bold;
+                              border-radius: 8px;
+                              cursor: pointer;
+                              transition: all 0.3s ease;
+                              text-transform: uppercase;
+                              box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+                }
+                .copy-btn:hover {
+                              background: #ff3333;
+                              transform: translateY(-2px);
+                              box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+                }
+                .copy-btn:active {
+                              transform: translateY(0);
+                }
+                .footer-text {
+                              color: #888;
+                              font-size: 12px;
+                              margin-top: 20px;
+                }
+
+                #toast-container {
+                              position: fixed;
+                              top: 20px;
+                              left: 50%;
+                              transform: translateX(-50%) translateY(-150%);
+                              z-index: 9999;
+                              transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                }
+                #toast-container.show {
+                              transform: translateX(-50%) translateY(0);
+                }
+                .toast {
+                              background: rgba(15, 15, 15, 0.8);
+                              backdrop-filter: blur(10px);
+                              border: 1px solid rgba(255, 0, 0, 0.5);
+                              border-radius: 12px;
+                              padding: 15px 25px;
+                              display: flex;
+                              align-items: center;
+                              gap: 15px;
+                              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 0, 0, 0.2);
+                              min-width: 300px;
+                              position: relative;
+                              overflow: hidden;
+                }
+                .toast-icon {
+                              width: 28px;
+                              height: 28px;
+                              background: #f00;
+                              border-radius: 50%;
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              font-weight: bold;
+                              font-size: 16px;
+                              box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+                }
+                .toast-content {
+                              flex: 1;
+                }
+                .toast-title {
+                              font-weight: bold;
+                              font-size: 15px;
+                              color: #fff;
+                              margin: 0;
+                }
+                .toast-msg {
+                              font-size: 13px;
+                              color: rgba(255, 255, 255, 0.7);
+                              margin: 2px 0 0 0;
+                }
+                .toast-progress {
+                              position: absolute;
+                              bottom: 0;
+                              left: 0;
+                              height: 3px;
+                              background: #f00;
+                              width: 100%;
+                              transition: width 3s linear;
+                }
+            </style>
+  </head>
+  <body>
+    <div id="toast-container">
+          <div class="toast">
+                    <div class="toast-icon">&#10003;</div>div>
+                    <div class="toast-content">
+                                  <p class="toast-title">Berhasil!</p>p>
+                                  <p class="toast-msg">Kode lisensi telah disalin.</p>p>
+                    </div>div>
+                    <div class="toast-progress" id="toast-progress"></div>div>
+          </div>div>
+    </div>div>
+
+    <div class="container">
+          <h1>TOKEN LISENSI HARI INI</h1>
+        <p style="color: #ccc; font-size: 14px;">Silakan salin kode di bawah ini dan masukkan ke aplikasi GDX Tools Anda.</p>p>
+        
+        <div class="key-box" id="licenseKey">GDX-20260504-PRO</div>div>
+        
+        <button class="copy-btn" id="copyBtn">SALIN KODE SEKARANG</button>button>
+        
+        <p class="footer-text">Token ini diperbarui secara otomatis setiap hari.</p>p>
+    </div>div>
+  
+  <script>
+        const copyBtn = document.getElementById('copyBtn');
+        const licenseKey = document.getElementById('licenseKey').innerText;
+        const toastContainer = document.getElementById('toast-container');
+        const toastProgress = document.getElementById('toast-progress');
+
+        copyBtn.addEventListener('click', () => {
+                  navigator.clipboard.writeText(licenseKey).then(() => {
+                                showToast();
+                  });
+        });
+
+        function showToast() {
+                  toastContainer.classList.add('show');
+                  toastProgress.style.width = '100%';
+                  setTimeout(() => {
+                                toastProgress.style.width = '0%';
+                  }, 10);
+                  setTimeout(() => {
+                                toastContainer.classList.remove('show');
+                  }, 3000);
+        }
+  </script>
+
+  </body>
+</html>
+  </script></h1>
+  </body>
+      </style></title>
+  </head>
